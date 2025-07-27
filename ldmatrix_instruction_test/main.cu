@@ -36,6 +36,9 @@ __global__ void ld_matrix_test() {
     asm volatile("ldmatrix.sync.aligned.m8n8.x4.shared.b16 {%0, %1, %2, %3}, [%4];\n"
                  : "=r"(regs[0].u32), "=r"(regs[1].u32), "=r"(regs[2].u32), "=r"(regs[3].u32)
                  : "r"(smem_int_ptr));
+    // asm volatile("ldmatrix.sync.aligned.m8n8.x1.shared.b16 {%0}, [%1];\n"
+    //              : "=r"(regs[0].u32)
+    //              : "r"(smem_int_ptr));
     // 添加trans会按照列的方向加载，同一个寄存器中的两个half元素也不在挨着了
     // T0: R1(0, 16), R2(128, 144), R3(8, 24), R4(136, 152)
     //- asm volatile("ldmatrix.sync.aligned.trans.m8n8.x4.shared.b16 {%0, %1, %2, %3}, [%4];\n"
